@@ -10,10 +10,11 @@ fi
 cpu_arch=$(uname -m)
 
 # Check if the CPU architecture is aarch64/arm64
+base_url="https://abetlen.github.io/llama-cpp-python/whl"
 if [ "$cpu_arch" = "aarch64" ] || [ "$cpu_arch" = "arm64" ]; then
-	pip_command="python -m pip install llama-cpp-python --extra-index-url https://abetlen.github.io/llama-cpp-python/whl/metal"
+	pip_command="python -m pip install llama-cpp-python --extra-index-url $base_url/metal"
 else
-	pip_command="python -m pip install llama-cpp-python --extra-index-url https://abetlen.github.io/llama-cpp-python/whl/cpu"
+	pip_command="python -m pip install llama-cpp-python --extra-index-url $base_url/cpu"
 fi
 
 echo "Recommended install command for llama-cpp-python: $pip_command"
