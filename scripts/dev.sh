@@ -6,27 +6,11 @@ source serge.env
 # Get CPU Architecture
 cpu_arch=$(uname -m)
 
-# Function to detect CPU features
-detect_cpu_features() {
-	cpu_info=$(lscpu)
-	if echo "$cpu_info" | grep -q "avx512"; then
-		echo "AVX512"
-	elif echo "$cpu_info" | grep -q "avx2"; then
-		echo "AVX2"
-	elif echo "$cpu_info" | grep -q "avx"; then
-		echo "AVX"
-	else
-		echo "basic"
-	fi
-}
-
 # Check if the CPU architecture is aarch64/arm64
-if [ "$cpu_arch" = "aarch64" ]; then
-	pip_command="python -m pip install -v llama-cpp-python==$LLAMA_PYTHON_VERSION --only-binary=:all: --extra-index-url=https://gaby.github.io/arm64-wheels/"
+if [ "$cpu_arch" = "aarch64" ] || [ "$cpu_arch" = "arm64" ]; then
+	pip_command="python -m pip install llama-cpp-python --extra-index-url https://abetlen.github.io/llama-cpp-python/whl/metal"
 else
-	# Use @smartappli provided wheels
-	cpu_feature=$(detect_cpu_features)
-	pip_command="python -m pip install -v llama-cpp-python==$LLAMA_PYTHON_VERSION --only-binary=:all: --extra-index-url=https://smartappli.github.io/serge-wheels/$cpu_feature/cpu"
+	pip_command="python -m pip install llama-cpp-python --extra-index-url https://abetlen.github.io/llama-cpp-python/whl/cpu"
 fi
 
 echo "Recommended install command for llama-cpp-python: $pip_command"
