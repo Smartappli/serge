@@ -3,7 +3,7 @@
 set -x
 if ! source serge.env; then
 	echo "Error: Failed to source serge.env"
-  	exit 1
+	exit 1
 fi
 
 # Get CPU Architecture
@@ -27,7 +27,7 @@ _term() {
 }
 
 # Install python bindings
-eval "$pip_command" || {
+$pip_command || {
 	echo 'Failed to install llama-cpp-python'
 	exit 1
 }
