@@ -1,7 +1,10 @@
 #!/bin/bash
 
 set -x
-source serge.env
+if ! source serge.env; then
+	echo "Error: Failed to source serge.env"
+  	exit 1
+fi
 
 # Get CPU Architecture
 cpu_arch=$(uname -m)
