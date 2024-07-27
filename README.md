@@ -45,6 +45,17 @@ volumes:
 
 Then, just visit http://localhost:8008, You can find the API documentation at http://localhost:8008/api/docs
 
+### 🌍 Environment Variables
+
+The following Environment Variables are available:
+
+| Variable Name         | Description                                             | Default Value                        |
+|-----------------------|---------------------------------------------------------|--------------------------------------|
+| `SERGE_DATABASE_URL`  | Database connection string                              | `sqlite:////data/db/sql_app.db`      |
+| `SERGE_JWT_SECRET`    | Key for auth token encryption. Use a random string      | `uF7FGN5uzfGdFiPzR`                   |
+| `SERGE_SESSION_EXPIRY`| Duration in minutes before a user must reauthenticate   | `60`                                 |
+| `NODE_ENV`            | Node.js running environment                   | `production`                        |
+
 ## 🖥️ Windows
 
 Ensure you have Docker Desktop installed, WSL2 configured, and enough free RAM to run models.
@@ -99,7 +110,7 @@ Additional models can be requested by opening a GitHub issue. Other models are a
 
 ## ⚠️ Memory Usage
 
-LLaMA will crash if you don't have enough available memory for the model:
+LLaMA will crash if you don't have enough available memory for the model
 
 ## 💬 Support
 
@@ -119,3 +130,4 @@ git clone https://github.com/serge-chat/serge.git
 cd serge/
 docker compose -f docker-compose.dev.yml up --build
 ```
+The project will wait for a python debugger session to connect on port 5678. The webui will remain unreponsive until connected.
